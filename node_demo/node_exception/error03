@@ -1,0 +1,22 @@
+const EventEmitter = require('events');
+const ee = new EventEmitter();
+
+/*这是es6的写法，前提是新建的文件为es6文件
+setImmediate(() => {
+    // 这会使进程崩溃，因为还为添加 'error' 事件句柄。
+    ee.emit('error', new Error('这会崩溃'));
+});*/
+
+/*这是javascript的写法
+function setImmediate(){
+    ee.emit('error', new Error('这会崩溃'));
+}
+
+setImmediate();*/
+/*
+添加error事件，则不会崩溃
+    ee.on('error',function (err) {
+    console.log(err);
+});*/
+
+console.log("xixi");

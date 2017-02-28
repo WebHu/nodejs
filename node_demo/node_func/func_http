@@ -1,0 +1,26 @@
+/**
+ * fileName:func_http
+ * author:gamehu
+ * date:2017/2/28 14:37
+ * desc:http
+*/
+
+var http=require("http");
+
+http.createServer(function(request, response) {
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+}).listen(4000);
+
+
+/* 效果等同
+var http = require("http");
+
+function onRequest(request, response) {
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+}
+
+http.createServer(onRequest).listen(4000);*/

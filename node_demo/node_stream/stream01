@@ -1,0 +1,28 @@
+/**
+ * fileName:stream01 ES6 文件
+ * author:gamehu
+ * date:2017/2/28 13:50
+ * desc:stream流，读取流
+*/
+var fs = require("fs");
+var data = '';
+
+// 创建可读流
+var readerStream = fs.createReadStream('stream.txt');
+
+// 设置编码为 utf8。
+readerStream.setEncoding('UTF8');
+
+// 处理流事件 --> data, end, and error
+readerStream.on('data', function(chunk) {
+    data += chunk;
+});
+readerStream.on('end',function(){
+    console.log(data);
+});
+//继承了EventEmitter ，所以能使用on、error等事件，通过这种方式处理错误能捕获异步、同步错误
+readerStream.on('error', function(err){
+    console.error(err.stack);
+});
+
+console.log("程序执行完毕");

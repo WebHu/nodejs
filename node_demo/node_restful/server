@@ -1,0 +1,73 @@
+/**
+ * fileName:server
+ * author:gamehu
+ * date:2017/2/28 17:06
+ * desc:创建restapi
+*/
+
+var express=require("express");
+var app=express();
+var fs=require("fs");
+
+app.get('/listUsers',function (req,res) {
+    //读取json
+        fs.readFile(__dirname+"/user","utf-8",function (err,data) {
+            if(err){
+                res.send("错啦");
+                console.log(err);
+                return;
+            }
+            res.send(data);
+        })
+})
+
+
+app.get('/addUser',function (req,res) {
+    //读取json
+    fs.readFile(__dirname+"/user","utf-8",function (err,data) {
+        if(err){
+            res.send("错啦");
+            console.log(err);
+            return;
+        }
+        data=JSON.parse(data);
+        //新增..
+        data["user4"]={"name4":"jj","age":44};
+        res.send(data);
+    })
+})
+
+//获取某个用户
+app.get('/listUsers/:name',function (req,res) {
+    //读取json
+    fs.readFile(__dirname+"/user","utf-8",function (err,data) {
+        if(err){
+            res.send("错啦");
+            console.log(err);
+            return;
+        }
+        data=JSON.parse(data);
+        //获取
+       var d=data[req.params.name];
+        res.send(d);
+    })
+})
+
+
+//删除某个用户
+
+app.get('/deleteUser/:name',function (req,res) {
+    //读取json
+    fs.readFile(__dirname+"/user","utf-8",function (err,data) {
+        if(err){
+            res.send("错啦");
+            console.log(err);
+            return;
+        }
+        data=JSON.parse(data);
+        //删除
+        delete data[req.params.name];
+        res.send(data);
+    })
+})
+app.listen(5000);

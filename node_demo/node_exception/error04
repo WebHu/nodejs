@@ -1,0 +1,24 @@
+/**
+ * fileName:error04
+ * author:gamehu
+ * date:2017/2/28 16:06
+ * desc:异步方法的回调捕获异常
+*/
+const fs = require('fs');
+
+function nodeStyleCallback(err, data) {
+    if (err) {
+        console.error('有一个错误', err);
+        return;
+    }
+    console.log(data);
+}
+//不回调捕获，则进程崩溃退出，不会在执行后面的方法
+fs.readFile('/some/file/that/does-not-exist', function (err,data) {
+    if(err){
+        console.error('错误', err);
+        return;
+    }
+    console.log(data);
+});
+fs.readFile('/some/file/that/does-exist', nodeStyleCallback)

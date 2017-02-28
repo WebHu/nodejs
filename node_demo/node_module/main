@@ -1,0 +1,16 @@
+/**
+ * fileName:main
+ * author:gamehu
+ * date:2017/2/28 14:12
+ * desc:测试对象
+*/
+//User也可以小写
+var User=require("./module01");
+var u=new User();
+
+u.setUname("张三");
+u.introduce();
+
+/* 直接调用导出的公共方法和属性
+var e=require("./module02");
+e.hai()*/
